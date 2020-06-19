@@ -10,7 +10,8 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install --no-instal
 ARG VERSION="1.7.0"
 
 RUN curl -sSL https://github.com/tlaplus/tlaplus/releases/download/v$VERSION/TLAToolbox-$VERSION.deb -o tla.deb \
-  && dpkg -i tla.deb
+  && dpkg -i tla.deb \
+  && rm /tla.deb
 
 COPY tla.sh /bin/tla.sh
 RUN chmod +x /bin/tla.sh
