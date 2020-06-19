@@ -35,7 +35,11 @@ case "$kind" in
 
         exit 0;;
     check)
-        dobuild
+        if [ "${2:-}" == "--build" ]; then
+            args=${@:3}
+            dobuild
+        fi
+
         docheck
 
         exit 0;;
@@ -46,13 +50,13 @@ case "$kind" in
     *)
         echo "Interface to TLA+"
         echo
-        echo "build"
+        echo "build ARGS"
         echo "runs PlusCal translation and checks with the semantic model checker"
         echo
-        echo "check"
+        echo "check [--build] ARGS"
         echo "runs the TLA+ model checker"
         echo
-        echo "eval"
+        echo "eval EXPR"
         echo "evaluates an inline expression"
         echo
         exit 0;;
